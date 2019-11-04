@@ -23,6 +23,9 @@ end
 def self.access_key
   mpesa_main=Mpesamain.new
   mpesa_main.get_access_token
-
 end
+def self.register_urls
+  (Mpesamain.new).register_urls
+end
+
 end
