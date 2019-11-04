@@ -9,6 +9,7 @@ module Mpesa
         @consumer_key=nil
         @consumer_secret=nil
         @paybil=nil
+        @lipa_na_mpesa=nil
       end
 
   end

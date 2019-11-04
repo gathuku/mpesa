@@ -21,6 +21,8 @@ def self.configure
 end
 
 def self.access_key
-  Mpesamain.get_access_token
+  mpesa_main=Mpesamain.new
+  mpesa_main.get_access_token
+
 end
 end
