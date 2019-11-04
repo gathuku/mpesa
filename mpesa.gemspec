@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{a simple gem to integrate ruby with mpesa Apis}
   spec.description   = %q{the gem will allow you to simply integrate eithmpesa api}
-  spec.homepage      = "https:://gathuku.tech"
+  spec.homepage      = "https://github.com/gathuku/ruby_mpesa"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
