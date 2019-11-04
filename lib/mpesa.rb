@@ -1,6 +1,6 @@
 require "mpesa/version"
 require "mpesa/configuration"
-
+require "mpesa/mpesamain"
 module Mpesa
   class Error < StandardError; end
   # Your code goes here...
@@ -18,5 +18,9 @@ end
 
 def self.configure
   yield(configuration)
+end
+
+def self.access_key
+  Mpesamain.get_access_token
 end
 end
