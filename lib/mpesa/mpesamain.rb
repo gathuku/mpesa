@@ -16,16 +16,6 @@ require 'faraday'
 
     def get_access_token
         uri = URI('https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials')
-    #   http=  Net::HTTP.start(uri.host, uri.port,
-    # :use_ssl => uri.scheme == 'https',
-    # :verify_mode => OpenSSL::SSL::VERIFY_NONE)
-    #
-    # request = Net::HTTP::Get.new uri.request_uri
-    # request.basic_auth @config.consumer_key, @config.consumer_secret
-    #
-    # response= http.request request # Net::HTTPResponse object
-    # puts response
-    # puts response.body
     conn= Faraday.new(url:uri) do |req|
       req.adapter Faraday.default_adapter
       req.basic_auth(@config.consumer_key, @config.consumer_secret)
