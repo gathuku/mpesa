@@ -1,4 +1,4 @@
-require "lib/mpesa"
+require "mpesa"
 module Mpesa
   class Configuration
     attr_accessor :mpesa_env,:consumer_key, :consumer_secret, :paybil,
