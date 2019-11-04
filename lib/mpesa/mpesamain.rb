@@ -1,4 +1,4 @@
-require "configuration"
+require "mpesa/configuration"
 require 'net/http'
 require 'net/https'
 require 'uri'
