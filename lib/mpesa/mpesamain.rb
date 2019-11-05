@@ -24,18 +24,20 @@ require 'json'
 
         res=conn.get
         data =JSON.parse(res)
-        puts data['access_token']
+        # puts data['access_token']
+        data['access_token']
 
     end
 
     def register_urls
        uri = URI('https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl')
-       body=[
-         'ResponseType' => 'Completed',
-         'ConfirmationUrl' => @config.confirmation_url,
-         'ValidationUrl' => @config.validation_url
-       ];
-       conn = Farady.new(url:uri) do |req|
+       body={
+         'ResponseType': 'Completed',
+         'ConfirmationUrl': @config.confirmation_url,
+         'ValidationUrl': @config.validation_url
+       };
+
+       conn = Faraday.new(url:uri) do |req|
          req.adapter Farady.default_adapter
          req.header['Accept']='application/json'
          req.header['Content-type']='application/json'
