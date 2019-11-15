@@ -38,7 +38,7 @@ require 'json'
        };
 
        conn = Faraday.new(url:uri) do |req|
-         req.adapter Farady.default_adapter
+         req.adapter Faraday.default_adapter
          req.header['Accept']='application/json'
          req.header['Content-type']='application/json'
          req.header['Authorization']='Bearer #{get_access_token}'
