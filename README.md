@@ -1,8 +1,6 @@
 # Mpesa
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mpesa`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to ruby_mpesa gem. The gem will help you integrate with mpesa daraja API very easily.
 
 ## Installation
 
@@ -20,9 +18,24 @@ Or install it yourself as:
 
     $ gem install mpesa
 
+## Configuration
+You will need to configure the gem with your own credentials.
+```ruby
+Mpesa.configure do |config|
+  config.consumer_key="YOUR_CONSUMER_KEY"
+  config.consumer_secret="YOUR_CONSUMER_SECRET"
+  config.validation_url="YOUR_VALIDATION_URL"
+  config.confirmation_url="YOUR_CONFIRMATION_URL"
+  config.paybil="YOUR_PAYBIL"
+end
+```
 ## Usage
 
-TODO: Write usage instructions here
+### Register C2B URLS
+
+### Lipa na Mpesa online
+
+### B2C
 
 ## Development
 
