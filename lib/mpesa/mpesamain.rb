@@ -21,31 +21,23 @@ require 'json'
           req.adapter Faraday.default_adapter
           req.basic_auth(@config.consumer_key, @config.consumer_secret)
         end
-
-        res=conn.get
-        data =JSON.parse(res)
-        # puts data['access_token']
-        data['access_token']
-
+        conn.get
+        #JSON.parse(conn.get)['access_token']
     end
 
     def register_urls
-       uri = URI('https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl')
+       url = URI('https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl')
        body={
          'ResponseType': 'Completed',
          'ConfirmationUrl': @config.confirmation_url,
          'ValidationUrl': @config.validation_url
        };
-
-       conn = Faraday.new(url:uri) do |req|
-         req.adapter Faraday.default_adapter
-         req.header['Accept']='application/json'
-         req.header['Content-type']='application/json'
-         req.header['Authorization']='Bearer #{get_access_token}'
-         req.body = Json.generate(body)
-       end
-       res = conn.get
-       puts res
+      headers={
+        'Accept':'application/json',
+        'Content-Type':'application/json',
+        'Authorization': 'Bearer #{get_access_token}'
+      }
+      Faraday.post(url,body,headers)
     end
 
   end
