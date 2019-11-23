@@ -1,43 +1,84 @@
-require "mpesa/configuration"
-require 'uri'
-require 'faraday'
-require 'json'
+# frozen_string_literal: true
 
+# Main logic
+module Mpesa
+  class << self
+    @base_url = if Mpesa.configuration.env == 'sanbox'
+                  'https://sandbox.safaricom.co.ke'
+                else
+                  'https://api.safaricom.co.ke'
+                end
 
-  class Mpesamain
+    # Get access Token
+    def access_token
+      path = '/oauth/v1/generate?grant_type=client_credentials'
 
-    def initialize
-      @config=Mpesa::Configuration.new
-      @config.consumer_key = "aR7R09zePq0OSfOttvuQDrfdM4n37i0C"
-      @config.consumer_secret="F9AebI6azDlRjLiR"
-      @config.confirmation_url ="https://524317db.ngrok.io/mpesa"
-      @config.validation_url = "https://524317db.ngrok.io/mpesa"
-      @uri =URI('https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials')
+      conn = Faraday.new(url: @base_url + path) do |req|
+        req.adapter Faraday.default_adapter
+        req.basic_auth(@config.consumer_key, @config.consumer_secret)
+      end
+      conn.get
+      # JSON.parse(conn.get)['access_token']
     end
 
-    def get_access_token
-        uri = URI('https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials')
-        conn= Faraday.new(url:uri) do |req|
-          req.adapter Faraday.default_adapter
-          req.basic_auth(@config.consumer_key, @config.consumer_secret)
-        end
-        conn.get
-        #JSON.parse(conn.get)['access_token']
-    end
-
+    # Register C2B URLs
     def register_urls
-       url = URI('https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl')
-       body={
-         'ResponseType': 'Completed',
-         'ConfirmationUrl': @config.confirmation_url,
-         'ValidationUrl': @config.validation_url
-       };
-      headers={
-        'Accept':'application/json',
-        'Content-Type':'application/json',
-        'Authorization': 'Bearer #{get_access_token}'
+      path = '/mpesa/c2b/v1/registerurl'
+      body = {
+        'ResponseType': 'Completed',
+        'ConfirmationUrl': Mpesa.configuration.confirmation_url,
+        'ValidationUrl': Mpesa.configuration.validation_url
       }
-      Faraday.post(url,body,headers)
+      call(path: path, body: body)
     end
 
+    # Send B2C payouts
+    def payouts(amount:, phone:, command_id:, remarks:)
+      path = 'b2c/v1/paymentrequest'
+      body = {
+        'InitiatorName': Mpesa.configuration.initiator_username,
+        'SecurityCredential': '',
+        'CommandID': command_id,
+        'Amount': amount,
+        'PartyA': Mpesa.configuration.paybill,
+        'PartyB': phone,
+        'Remarks': remarks,
+        'QueueTimeOutURL': Mpesa.configuration.timeout_url,
+        'ResultURL': Mpesa.configuaration.result_url,
+        'Occasion': '' # optional
+      }
+
+      call(path: path, body: body)
+    end
+
+    # LIPA NA Mpesa Online
+    def stk_push(amount:, phone:)
+      password = base64.encode(shortcode + lipa_na_mpesa_key + timestamp)
+      body = {
+        'BusinessShortCode': '',
+        'Password': '',
+        'Timestamp': '',
+        'TransactionType': 'CustomerPayBillOnline',
+        'Amount': amount,
+        'PartyA': phone,
+        'PartyB': Mpesa.configuration.shorcode,
+        'PhoneNumber': phone,
+        'CallBackURL': Mpesa.configuration.lnmocallback,
+        'AccountReference': '',
+        'TransactionDesc': ''
+      }
+
+      call(path: path, body: body)
+    end
+
+    def call(path:, body:)
+      headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer #{JSON.parse(Mpesa.access_token)['access_token']}"
+      }
+
+      Faraday.post(@base_url + path, body.to_json, headers)
+    end
   end
+end
