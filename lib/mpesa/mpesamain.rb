@@ -33,7 +33,7 @@ module Mpesa
     end
 
     # Send B2C payouts
-    def payouts(amount:, phone:, command_id:, remarks:)
+    def payout(amount:, phone:, command_id:, remarks:)
       path = 'b2c/v1/paymentrequest'
       body = {
         'InitiatorName': Mpesa.configuration.initiator_username,
