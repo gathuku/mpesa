@@ -29,7 +29,8 @@ end
 class Configuration
   attr_accessor :confirmation_url, :validation_url,
                 :shortcode, :paybil, :initiator_username,
-                :timeout_url, :result_url
+                :timeout_url, :result_url, :lnmocallback,
+                :lipa_na_mpesa_key
   def initialize
     @confirmation_url = '/confirm'
     @validation_url = '/validate'
