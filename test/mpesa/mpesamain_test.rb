@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-requre 'test_helper'
+require 'test_helper'
 class MpesamainTest < Minitest::Test
   # Test Get access Token
   def test_access_token
