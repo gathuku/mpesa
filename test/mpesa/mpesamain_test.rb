@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-requre 'test_helper'
+require 'test_helper'
 class MpesamainTest < Minitest::Test
   # Test Get access Token
   def test_access_token
-    VCR.user_cassette('access_token') do
+    VCR.use_cassette('access_token') do
       response = Mpesa.access_token
       assert_equal(200, response.status)
     end
@@ -14,7 +14,7 @@ class MpesamainTest < Minitest::Test
   def test_register_urls
     VCR.use_cassette('register_urls') do
       response = Mpesa.register_urls
-      asser_equal(200, response.status)
+      assert_equal(200, response.status)
     end
   end
 
