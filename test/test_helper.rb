@@ -34,8 +34,8 @@ class MpesaTest < Minitest::Test
   def setup
     # Configure
     Mpesa.configure do |config|
-      config.confirmation_url = 'https://example.com/confirm'
-      config.validation_url = 'https://example.com/confirm'
+      config.confirmation_url = 'https://20cb9b41.ngrok.io/confirm'
+      config.validation_url = 'https://20cb9b41.ngrok.io/validate'
       config.shortcode = '174379'
       config.paybill = '601380'
       config.initiator_username = 'testapi113'

@@ -32,6 +32,7 @@ module Mpesa
         'ConfirmationUrl': Mpesa.configuration.confirmation_url,
         'ValidationUrl': Mpesa.configuration.validation_url
       }
+      puts body
       call(path: path, body: body)
     end
 

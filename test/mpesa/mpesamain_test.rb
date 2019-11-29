@@ -14,6 +14,7 @@ class MpesamainTest < Minitest::Test
   def test_register_urls
     VCR.use_cassette('register_urls') do
       response = Mpesa.register_urls
+      puts response.body
       assert_equal(200, response.status)
     end
   end
@@ -22,6 +23,7 @@ class MpesamainTest < Minitest::Test
   def test_b2c_payout
     VCR.use_cassette('b2c_payout') do
       response = Mpesa.payout(amount: 100, phone: '', command_id: '', remarks: '')
+      puts response.body
       assert_equal(200, response.status)
     end
   end
@@ -29,7 +31,8 @@ class MpesamainTest < Minitest::Test
   # Test STK
   def test_stk
     VCR.use_cassette('stk_push') do
-      response = Mpesa.stk_push(amount: 100, phone: '')
+      response = Mpesa.stk_push(amount: 100, phone: '25405112855')
+      puts response.body
       assert_equal(200, response.status)
     end
   end
