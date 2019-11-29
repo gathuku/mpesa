@@ -37,6 +37,8 @@ module Mpesa
 
     # Send B2C payouts
     def payout(amount:, phone:, command_id:, remarks:)
+      # SecurityCredential= Safaricom007@
+
       path = '/b2c/v1/paymentrequest'
       body = {
         'InitiatorName': Mpesa.configuration.initiator_username,
@@ -59,7 +61,7 @@ module Mpesa
       shortcode = Mpesa.configuration.shortcode
       lipa_na_mpesa_key = Mpesa.configuration.lipa_na_mpesa_key
       timestamp = Time.now.strftime('%Y%m%d%H%M%S')
-      password = Base64.encode(shortcode + lipa_na_mpesa_key + timestamp)
+      password = Base64.encode64(shortcode + lipa_na_mpesa_key + timestamp)
       path = '/stkpush/v1/processrequest'
       body = {
         'BusinessShortCode': '',
@@ -68,7 +70,7 @@ module Mpesa
         'TransactionType': 'CustomerPayBillOnline',
         'Amount': amount,
         'PartyA': phone,
-        'PartyB': Mpesa.configuration.shorcode,
+        'PartyB': Mpesa.configuration.shortcode,
         'PhoneNumber': phone,
         'CallBackURL': Mpesa.configuration.lnmocallback,
         'AccountReference': ref,

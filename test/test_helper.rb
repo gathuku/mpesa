@@ -38,7 +38,7 @@ class MpesaTest < Minitest::Test
       config.validation_url = 'https://example.com/confirm'
       config.shortcode = '174379'
       config.paybill = '601380'
-      config.initiator_username = 'gathuku'
+      config.initiator_username = 'testapi113'
       config.timeout_url = 'https://example.com/timeout'
       config.result_url = 'https://example.com/result'
       config.lnmocallback = 'https://example.com/lnmocallback'
