@@ -40,7 +40,7 @@ module Mpesa
     def payout(amount:, phone:, command_id:, remarks:)
       # SecurityCredential= Safaricom007@
 
-      path = '/b2c/v1/paymentrequest'
+      path = '/mpesa/b2c/v1/paymentrequest'
       body = {
         'InitiatorName': Mpesa.configuration.initiator_username,
         'SecurityCredential': '',
