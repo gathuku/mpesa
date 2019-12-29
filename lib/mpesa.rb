@@ -6,6 +6,7 @@ require 'uri'
 require 'faraday'
 require 'json'
 
+# main module
 module Mpesa
   class Error < StandardError; end
   # Your code goes here...
@@ -14,13 +15,13 @@ module Mpesa
 
     # Configure method
     def configure
-      @configuration ||= Configuration.new
+      self.configuration ||= Configuration.new
       yield(configuration)
     end
 
     # Reset to load defaults
     def reset
-      @configuration = Configuration.new
+      self.configuration = Configuration.new
     end
   end
 end
@@ -28,9 +29,9 @@ end
 # Configuration class
 class Configuration
   attr_accessor :confirmation_url, :validation_url,
-                :shortcode, :paybil, :initiator_username,
+                :shortcode, :paybill, :initiator_username,
                 :timeout_url, :result_url, :lnmocallback,
-                :lipa_na_mpesa_key
+                :lipa_na_mpesa_key, :env, :base_url, :key, :secret
   def initialize
     @confirmation_url = '/confirm'
     @validation_url = '/validate'

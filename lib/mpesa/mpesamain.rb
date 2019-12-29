@@ -1,24 +1,27 @@
 # frozen_string_literal: true
 
 # Main logic
+
+# extends Mpesa module
 module Mpesa
   class << self
-    @base_url = if Mpesa.configuration.env == 'sanbox'
-                  'https://sandbox.safaricom.co.ke'
-                else
-                  'https://api.safaricom.co.ke'
-                end
+    # @base_url = if Mpesa.configuration.env == 'sanbox'
+    #               'https://sandbox.safaricom.co.ke'
+    #             else
+    #               'https://api.safaricom.co.ke'
+    #             end
 
     # Get access Token
     def access_token
       path = '/oauth/v1/generate?grant_type=client_credentials'
-
-      conn = Faraday.new(url: @base_url + path) do |req|
+      base_url = Mpesa.configuration.base_url
+      key = Mpesa.configuration.key
+      secret = Mpesa.configuration.secret
+      conn = Faraday.new(url: base_url + path) do |req|
         req.adapter Faraday.default_adapter
-        req.basic_auth(@config.consumer_key, @config.consumer_secret)
+        req.basic_auth(key, secret)
       end
       conn.get
-      # JSON.parse(conn.get)['access_token']
     end
 
     # Register C2B URLs
@@ -29,12 +32,15 @@ module Mpesa
         'ConfirmationUrl': Mpesa.configuration.confirmation_url,
         'ValidationUrl': Mpesa.configuration.validation_url
       }
+      puts body
       call(path: path, body: body)
     end
 
     # Send B2C payouts
     def payout(amount:, phone:, command_id:, remarks:)
-      path = 'b2c/v1/paymentrequest'
+      # SecurityCredential= Safaricom007@
+
+      path = '/b2c/v1/paymentrequest'
       body = {
         'InitiatorName': Mpesa.configuration.initiator_username,
         'SecurityCredential': '',
@@ -44,7 +50,7 @@ module Mpesa
         'PartyB': phone,
         'Remarks': remarks,
         'QueueTimeOutURL': Mpesa.configuration.timeout_url,
-        'ResultURL': Mpesa.configuaration.result_url,
+        'ResultURL': Mpesa.configuration.result_url,
         'Occasion': '' # optional
       }
 
@@ -56,8 +62,8 @@ module Mpesa
       shortcode = Mpesa.configuration.shortcode
       lipa_na_mpesa_key = Mpesa.configuration.lipa_na_mpesa_key
       timestamp = Time.now.strftime('%Y%m%d%H%M%S')
-      password = Base64.encode(shortcode + lipa_na_mpesa_key + timestamp)
-      path = 'stkpush/v1/processrequest'
+      password = Base64.encode64(shortcode + lipa_na_mpesa_key + timestamp)
+      path = '/stkpush/v1/processrequest'
       body = {
         'BusinessShortCode': '',
         'Password': password,
@@ -65,7 +71,7 @@ module Mpesa
         'TransactionType': 'CustomerPayBillOnline',
         'Amount': amount,
         'PartyA': phone,
-        'PartyB': Mpesa.configuration.shorcode,
+        'PartyB': Mpesa.configuration.shortcode,
         'PhoneNumber': phone,
         'CallBackURL': Mpesa.configuration.lnmocallback,
         'AccountReference': ref,
@@ -76,13 +82,14 @@ module Mpesa
     end
 
     def call(path:, body:)
+      base_url = Mpesa.configuration.base_url
+      token = JSON.parse(Mpesa.access_token.body)['access_token']
       headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': "Bearer #{JSON.parse(Mpesa.access_token)['access_token']}"
+        'Authorization': "Bearer #{token}"
       }
-
-      Faraday.post(@base_url + path, body.to_json, headers)
+      Faraday.post(base_url + path, body.to_json, headers)
     end
   end
 end
