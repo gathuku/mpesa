@@ -28,9 +28,10 @@ module Mpesa
     def register_urls
       path = '/mpesa/c2b/v1/registerurl'
       body = {
+        'ShortCode': Mpesa.configuration.paybill,
         'ResponseType': 'Completed',
-        'ConfirmationUrl': Mpesa.configuration.confirmation_url,
-        'ValidationUrl': Mpesa.configuration.validation_url
+        'ConfirmationURL': Mpesa.configuration.confirmation_url,
+        'ValidationURL': Mpesa.configuration.validation_url
       }
       puts body
       call(path: path, body: body)
