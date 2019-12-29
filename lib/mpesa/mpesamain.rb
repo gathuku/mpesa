@@ -69,7 +69,7 @@ module Mpesa
         'PhoneNumber': phone,
         'CallBackURL': Mpesa.configuration.lnmocallback,
         'AccountReference': ref,
-        'TransactionDesc': des
+        'TransactionDesc': desc
       }
 
       call(path: path, body: body)
