@@ -61,7 +61,7 @@ module Mpesa
       lipa_na_mpesa_key = Mpesa.configuration.lipa_na_mpesa_key
       timestamp = Time.now.strftime('%Y%m%d%H%M%S')
       password = Base64.encode64(shortcode + lipa_na_mpesa_key + timestamp)
-      path = '/stkpush/v1/processrequest'
+      path = '/mpesa/stkpush/v1/processrequest'
       body = {
         'BusinessShortCode': Mpesa.configuration.lnmo_shortcode,
         'Password': password,
