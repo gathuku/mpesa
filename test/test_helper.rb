@@ -23,7 +23,7 @@ VCR.configure do |config|
   config.allow_http_connections_when_no_cassette = false
   config.cassette_library_dir = File.expand_path('cassettes', __dir__)
   config.hook_into :webmock
-  config.ignore_request { ENV['DISABLE_VCR'] }
+  config.ignore_request { false } # ENV['DISABLE_VCR']
   config.ignore_localhost = true
   config.default_cassette_options = {
     record: :new_episodes
@@ -34,8 +34,8 @@ class MpesaTest < Minitest::Test
   def setup
     # Configure
     Mpesa.configure do |config|
-      config.confirmation_url = 'https://20cb9b41.ngrok.io/confirm'
-      config.validation_url = 'https://20cb9b41.ngrok.io/validate'
+      config.confirmation_url = 'https://980c7766.ngrok.io/api/confirmation_url'
+      config.validation_url = 'https://980c7766.ngrok.io/api/validation_url'
       config.shortcode = '174379'
       config.paybill = '601380'
       config.initiator_username = 'testapi113'
@@ -45,8 +45,8 @@ class MpesaTest < Minitest::Test
       config.lipa_na_mpesa_key = ENV['MPESA_ONLINE_KEY']
       config.env = 'sandbox'
       config.base_url = 'https://sandbox.safaricom.co.ke'
-      config.key = ENV['MPESA_KEY']
-      config.secret = ENV['MPESA_SECRET']
+      config.key = 'ZtkRW6ATbVtFpNml5w5SfG26Adfyagn9' # ENV['MPESA_KEY']
+      config.secret = 'dosFI1yQ8bvHEVFw' # ENV['MPESA_SECRET']
     end
   end
 end
