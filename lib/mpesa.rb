@@ -29,7 +29,7 @@ end
 # Configuration class
 class Configuration
   attr_accessor :confirmation_url, :validation_url,
-                :shortcode, :paybill, :initiator_username,
+                :lnmo_shortcode, :paybill, :initiator_username,
                 :timeout_url, :result_url, :lnmocallback,
                 :lipa_na_mpesa_key, :env, :base_url, :key, :secret,
                 :security_credential

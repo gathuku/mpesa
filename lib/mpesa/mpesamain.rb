@@ -33,18 +33,16 @@ module Mpesa
         'ConfirmationURL': Mpesa.configuration.confirmation_url,
         'ValidationURL': Mpesa.configuration.validation_url
       }
-      puts body
+
       call(path: path, body: body)
     end
 
     # Send B2C payouts
     def payout(amount:, phone:, command_id:, remarks:)
-      # SecurityCredential= Safaricom007@
-
       path = '/mpesa/b2c/v1/paymentrequest'
       body = {
         'InitiatorName': Mpesa.configuration.initiator_username,
-        'SecurityCredential': '',
+        'SecurityCredential': Mpesa.configuration.security_credential,
         'CommandID': command_id,
         'Amount': amount,
         'PartyA': Mpesa.configuration.paybill,
@@ -54,25 +52,24 @@ module Mpesa
         'ResultURL': Mpesa.configuration.result_url,
         'Occasion': '' # optional
       }
-
       call(path: path, body: body)
     end
 
     # LIPA NA Mpesa Online
     def stk_push(amount:, phone:, ref: 'Payment', desc: 'Payment')
-      shortcode = Mpesa.configuration.shortcode
+      shortcode = Mpesa.configuration.lnmo_shortcode
       lipa_na_mpesa_key = Mpesa.configuration.lipa_na_mpesa_key
       timestamp = Time.now.strftime('%Y%m%d%H%M%S')
       password = Base64.encode64(shortcode + lipa_na_mpesa_key + timestamp)
       path = '/stkpush/v1/processrequest'
       body = {
-        'BusinessShortCode': '',
+        'BusinessShortCode': Mpesa.configuration.lnmo_shortcode,
         'Password': password,
-        'Timestamp': '',
+        'Timestamp': timestamp,
         'TransactionType': 'CustomerPayBillOnline',
         'Amount': amount,
         'PartyA': phone,
-        'PartyB': Mpesa.configuration.shortcode,
+        'PartyB': Mpesa.configuration.lnmo_shortcode,
         'PhoneNumber': phone,
         'CallBackURL': Mpesa.configuration.lnmocallback,
         'AccountReference': ref,
