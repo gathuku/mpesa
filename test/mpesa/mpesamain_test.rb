@@ -23,7 +23,6 @@ class MpesamainTest < Minitest::Test
     VCR.use_cassette('b2c_payout') do
       response = Mpesa.payout(amount: 100, phone: '254705112855',
                               command_id: 'BusinessPayment', remarks: 'paid')
-      puts response.body
       assert_equal(200, response.status)
     end
   end
@@ -32,7 +31,6 @@ class MpesamainTest < Minitest::Test
   def test_stk
     VCR.use_cassette('stk_push') do
       response = Mpesa.stk_push(amount: 100, phone: '254705112855')
-      puts response.body
       assert_equal(200, response.status)
     end
   end

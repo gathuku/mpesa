@@ -59,13 +59,13 @@ module Mpesa
     def stk_push(amount:, phone:, ref: 'Payment', desc: 'Payment')
       shortcode = Mpesa.configuration.lnmo_shortcode
       lipa_na_mpesa_key = Mpesa.configuration.lipa_na_mpesa_key
-      timestamp = Time.now.strftime('%Y%m%d%H%M%S')
-      password = Base64.encode64(shortcode + lipa_na_mpesa_key + timestamp)
+      timestamp = Time.now.strftime('%Y%m%d%H%M%S').to_i
+      password = Base64.encode64("#{shortcode}#{lipa_na_mpesa_key}#{timestamp}")
       path = '/mpesa/stkpush/v1/processrequest'
       body = {
         'BusinessShortCode': Mpesa.configuration.lnmo_shortcode,
-        'Password': password,
-        'Timestamp': timestamp,
+        'Password': password.split("\n").join,
+        'Timestamp': timestamp.to_s,
         'TransactionType': 'CustomerPayBillOnline',
         'Amount': amount,
         'PartyA': phone,

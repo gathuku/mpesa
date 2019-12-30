@@ -34,14 +34,14 @@ class MpesaTest < Minitest::Test
   def setup
     # Configure
     Mpesa.configure do |config|
-      config.confirmation_url = 'https://980c7766.ngrok.io/api/confirmation_url'
-      config.validation_url = 'https://980c7766.ngrok.io/api/validation_url'
+      config.confirmation_url = 'https://7a5c955c.ngrok.io/api/confirmation_url'
+      config.validation_url = 'https://7a5c955c.ngrok.io/api/validation_url'
       config.lnmo_shortcode = '174379'
       config.paybill = '601380'
       config.initiator_username = 'testapi113'
       config.timeout_url = 'https://example.com/timeout'
       config.result_url = 'https://example.com/result'
-      config.lnmocallback = 'https://example.com/lnmocallback'
+      config.lnmocallback = 'https://7a5c955c.ngrok.io/lnmocallback'
       config.lipa_na_mpesa_key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919' # ENV['MPESA_ONLINE_KEY']
       config.env = 'sandbox'
       config.base_url = 'https://sandbox.safaricom.co.ke'
