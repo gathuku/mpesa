@@ -20,16 +20,42 @@ end
 You will need to configure the gem with your own credentials.
 ```ruby
 Mpesa.configure do |config|
-  config.consumer_key="YOUR_CONSUMER_KEY"
-  config.consumer_secret="YOUR_CONSUMER_SECRET"
-  config.validation_url="YOUR_VALIDATION_URL"
-  config.confirmation_url="YOUR_CONFIRMATION_URL"
-  config.paybil="YOUR_PAYBIL"
+  config.confirmation_url = 'https://7a5c955c.ngrok.io/api/confirmation_url'
+  config.validation_url = 'https://7a5c955c.ngrok.io/api/validation_url'
+  config.lnmo_shortcode = '174379'
+  config.paybill = '601380'
+  config.initiator_username = 'testapi113'
+  config.timeout_url = 'https://example.com/timeout'
+  config.result_url = 'https://example.com/result'
+  config.lnmocallback = 'https://7a5c955c.ngrok.io/lnmocallback'
+  config.lipa_na_mpesa_key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919' # ENV['MPESA_ONLINE_KEY']
+  config.env = 'sandbox'
+  config.base_url = 'https://sandbox.safaricom.co.ke'
+  config.security_credential = 'Safari.com868'
+  config.key = 'ZtkRW6ATbVtFpNml5w5SfG26Adffdkh9' # ENV['MPESA_KEY']
+  config.secret = 'dosFI1yQ8bvHdyhd' # ENV['MPESA_SECRET']
 end
 ```
 ## Usage
+The gem will allow you to consume below APIs.
+- Register C2B URLS
+- Lipa na mpesa online
+- B2C
+
+> All responses are a faraday response
+
+You have access to
+
+- response.status
+- response.headers
+- response.body
 
 ### Register C2B URLS
+To register urls ensure you have defined your `paybill`,`confirmation_url` and `validation_url` in your config block. Then call `register_urls` method on `Mpesa` class.
+
+```
+response = Mpesa.register_urls
+```
 
 ### Lipa na Mpesa online
 
