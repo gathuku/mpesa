@@ -1,22 +1,20 @@
 # Mpesa
 
-Welcome to ruby_mpesa gem. The gem will help you integrate with mpesa daraja API very easily.
+Welcome to mpesa gem. The gem will help you integrate with mpesa daraja API very easily.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'mpesa'
+Install from the command line
+```
+gem install mpesa --version "0.1.1" --source "https://rubygems.pkg.github.com/gathuku"
+```
+Install via `Gemfile`
+```
+source "https://rubygems.pkg.github.com/gathuku" do
+  gem "mpesa", "0.1.1"
+end
 ```
 
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install mpesa
 
 ## Configuration
 You will need to configure the gem with your own credentials.
