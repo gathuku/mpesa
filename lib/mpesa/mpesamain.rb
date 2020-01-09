@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+require 'token'
 # Main logic
-
 # extends Mpesa module
 module Mpesa
   class << self
@@ -81,7 +81,7 @@ module Mpesa
 
     def call(path:, body:)
       base_url = Mpesa.configuration.base_url
-      token = JSON.parse(Mpesa.access_token.body)['access_token']
+      token = Token.call
       headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
