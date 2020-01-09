@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'faraday', '~> 0.17.0'
   spec.add_runtime_dependency 'json', '~> 2.2'
   spec.add_runtime_dependency 'openssl', '~> 2.1'
+  spec.add_runtime_dependency 'redis', '~> 4.1', '>= 4.1.3'
   # request
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'minitest-reporters', '~> 1.4'
