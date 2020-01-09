@@ -81,7 +81,7 @@ module Mpesa
 
     def call(path:, body:)
       base_url = Mpesa.configuration.base_url
-      token = Token.call
+      token = Token.new.call
       headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
