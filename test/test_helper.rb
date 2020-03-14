@@ -45,7 +45,7 @@ class MpesaTest < Minitest::Test
       config.lipa_na_mpesa_key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919' # ENV['MPESA_ONLINE_KEY']
       config.env = 'sandbox'
       config.base_url = 'https://sandbox.safaricom.co.ke'
-      config.security_credential = 'Safari.com868'
+      config.initiator_password = 'Safari.com868'
       config.key = 'ZtkRW6ATbVtFpNml5w5SfG26Adfyagn9' # ENV['MPESA_KEY']
       config.secret = 'dosFI1yQ8bvHEVFw' # ENV['MPESA_SECRET']
     end

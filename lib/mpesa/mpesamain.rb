@@ -3,8 +3,6 @@
 # Main logic
 
 # extends Mpesa module
-require 'securitycred'
-
 module Mpesa
   class << self
     # @base_url = if Mpesa.configuration.env == 'sanbox'

@@ -2,6 +2,7 @@
 
 require 'mpesa/version'
 require 'mpesa/mpesamain'
+require 'mpesa/securitycred'
 require 'uri'
 require 'faraday'
 require 'json'
@@ -32,7 +33,7 @@ class Configuration
                 :lnmo_shortcode, :paybill, :initiator_username,
                 :timeout_url, :result_url, :lnmocallback,
                 :lipa_na_mpesa_key, :env, :base_url, :key, :secret,
-                :security_credential
+                :initiator_password
   def initialize
     @confirmation_url = '/confirm'
     @validation_url = '/validate'
