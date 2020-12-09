@@ -40,9 +40,10 @@ module Mpesa
     # Send B2C payouts
     def payout(amount:, phone:, command_id:, remarks:)
       path = '/mpesa/b2c/v1/paymentrequest'
+      password = Mpesa.configuration.initiator_password
       body = {
         'InitiatorName': Mpesa.configuration.initiator_username,
-        'SecurityCredential': Mpesa.configuration.security_credential,
+        'SecurityCredential': SecurityCred.new(password).password_credential,
         'CommandID': command_id,
         'Amount': amount,
         'PartyA': Mpesa.configuration.paybill,
