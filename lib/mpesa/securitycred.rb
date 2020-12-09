@@ -7,18 +7,19 @@ module Mpesa
   # Security Credentials
   class SecurityCred
     def initialize(pass)
-      @intitiator_password = pass
+      @initiator_password = pass
     end
 
     def password_credential
-      cert = if Mpesa.configuration.env == 'production'
+      raw = if Mpesa.configuration.env == 'production'
                File.read('lib/cert/production.pem')
              else
                File.read('lib/cert/sandbox.pem')
              end
 
-      key = OpenSSL::PKey::RSA.new(cert)
-      Base64.strict_encode_64(key.public_encrypt(@initiator_password.bytes))
+      cert = OpenSSL::X509::Certificate.new(raw)
+      key = cert.public_key
+      Base64.strict_encode64(key.public_encrypt(@initiator_password))
     end
   end
 end
