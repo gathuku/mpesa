@@ -3,6 +3,11 @@
 require 'test_helper'
 class MpesamainTest < Minitest::Test
   # Test Get access Token
+
+  def test_configured
+    refute_nil Mpesa.configuration.confirmation_url
+  end
+
   def test_access_token
     VCR.use_cassette('access_token') do
       response = Mpesa.access_token

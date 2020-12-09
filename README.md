@@ -19,6 +19,10 @@ end
 ## Configuration
 You will need to configure the gem with your own credentials.
 ```ruby
+# reset previous Configuration
+Mpesa.reset 
+
+# configure
 Mpesa.configure do |config|
   config.confirmation_url = 'https://7a5c955c.ngrok.io/api/confirmation_url'
   config.validation_url = 'https://7a5c955c.ngrok.io/api/validation_url'
