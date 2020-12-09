@@ -1,6 +1,6 @@
 # Mpesa
 
-Welcome to mpesa gem. The gem will help you integrate with mpesa daraja API very easily.
+Welcome to [mpesa](https://developer.safaricom.co.ke/) API gem. The gem will help you integrate with mpesa daraja API very easily.
 
 ## Installation
 
@@ -19,8 +19,8 @@ end
 ## Configuration
 You will need to configure the gem with your own credentials.
 ```ruby
-# reset previous Configuration
-Mpesa.reset 
+# clear previous Configuration
+Mpesa.reset
 
 # configure
 Mpesa.configure do |config|
@@ -35,7 +35,7 @@ Mpesa.configure do |config|
   config.lipa_na_mpesa_key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919' # ENV['MPESA_ONLINE_KEY']
   config.env = 'sandbox'
   config.base_url = 'https://sandbox.safaricom.co.ke'
-  config.security_credential = 'Safari.com868'
+  config.initiator_password = 'Safari.com868'
   config.key = 'ZtkRW6ATbVtFpNml5w5SfG26Adffdkh9' # ENV['MPESA_KEY']
   config.secret = 'dosFI1yQ8bvHdyhd' # ENV['MPESA_SECRET']
 end
@@ -50,9 +50,9 @@ The gem will allow you to consume below APIs.
 
 You have access to
 
-- response.status
-- response.headers
-- response.body
+- `response.status`
+- `response.headers`
+- `response.body`
 
 ### Register C2B URLS
 To register urls ensure you have defined your `paybill`,`confirmation_url` and `validation_url` in your config block. Then call `register_urls` method on `Mpesa` class.
@@ -67,10 +67,10 @@ Ensure you have added `lipa_na_mpesa_key`, `lnmo_shortcode`, `lnmocallback` in y
 ```
 response = Mpesa.stk_push(amount: 100, phone: '254705112855')
 ```
-The methods accepts amount and phone number params.
+The methods accepts amount and phone number keyword arguments.
 
 ### B2C
-Ensure you have `security_credential`, `result_url` and `timeout_url` in your config block.
+Ensure you have `initiator_password`, `result_url` and `timeout_url` in your config block.
 
 ```
 response = Mpesa.payout(amount: 100, phone: '254705112855',
