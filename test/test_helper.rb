@@ -32,6 +32,8 @@ end
 
 class MpesaTest < Minitest::Test
   def setup
+    # reset
+    Mpesa.reset
     # Configure
     Mpesa.configure do |config|
       config.confirmation_url = 'https://7a5c955c.ngrok.io/api/confirmation_url'
