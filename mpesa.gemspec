@@ -29,21 +29,21 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~>2.1.4'
-  spec.add_development_dependency 'rake', '~>12.3'
+  spec.add_development_dependency 'bundler', '>= 2.1.4'
+  spec.add_development_dependency 'rake', '>= 12.3'
   # dependancies
-  spec.add_runtime_dependency 'faraday', '~> 0.17.0'
-  spec.add_runtime_dependency 'json', '~> 2.2'
-  spec.add_runtime_dependency 'openssl', '~> 2.1'
+  spec.add_runtime_dependency 'faraday', '>= 1.1'
+  spec.add_runtime_dependency 'json', '>= 2.2'
+  spec.add_runtime_dependency 'openssl', '>= 2.1'
   # request
-  spec.add_development_dependency 'minitest', '~> 5.0'
-  spec.add_development_dependency 'minitest-reporters', '~> 1.4'
-  spec.add_development_dependency 'vcr', '~> 5.0'
-  spec.add_development_dependency 'webmock', '~> 3.7', '>= 3.7.6'
+  spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'minitest-reporters'
+  spec.add_development_dependency 'vcr'
+  spec.add_development_dependency 'webmock', '~> 3.7'
   # debugging
-  spec.add_development_dependency 'byebug', '~> 11.0'
-  spec.add_development_dependency 'pry-byebug', '~> 3.7'
+  spec.add_development_dependency 'byebug'
+  spec.add_development_dependency 'pry-byebug'
   # code coverage
-  spec.add_development_dependency 'coveralls', '~> 0.8'
-  spec.add_development_dependency 'simplecov', '~> 0.16.1'
+  spec.add_development_dependency 'coveralls'
+  spec.add_development_dependency 'simplecov'
 end
