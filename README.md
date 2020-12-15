@@ -18,6 +18,10 @@ end
 
 ## Configuration
 You will need to configure the gem with your own credentials.
+You can add the configuration in `config/initializers/mpesa.rb` if you are using Rails. Be sure to use the right credentials from mpesa developer portal.
+
+> Apart form other configuration be sure to change `config.env = 'production'` and `config.base_url='https://api.safaricom.co.ke'` when you go live to production.
+
 ```ruby
 # clear previous Configuration
 Mpesa.reset
@@ -36,8 +40,8 @@ Mpesa.configure do |config|
   config.env = 'sandbox'
   config.base_url = 'https://sandbox.safaricom.co.ke'
   config.initiator_password = 'Safari.com868'
-  config.key = 'ZtkRW6ATbVtFpNml5w5SfG26Adffdkh9' # ENV['MPESA_KEY']
-  config.secret = 'dosFI1yQ8bvHdyhd' # ENV['MPESA_SECRET']
+  config.key = 'ZtkRW6ATbVtFpNml5w5SfG26Adfyagn9' # ENV['MPESA_KEY']
+  config.secret = 'dosFI1yQ8bvHEVFw' # ENV['MPESA_SECRET']
 end
 ```
 ## Usage
@@ -53,6 +57,8 @@ You have access to
 - `response.status`
 - `response.headers`
 - `response.body`
+
+> If response status if not 200. Check `respose.body` or `response.reason_phrase` for more informative messages of the failure.
 
 ### Register C2B URLS
 To register urls ensure you have defined your `paybill`,`confirmation_url` and `validation_url` in your config block. Then call `register_urls` method on `Mpesa` class.

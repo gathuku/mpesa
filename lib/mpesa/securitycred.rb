@@ -12,9 +12,9 @@ module Mpesa
 
     def password_credential
       raw = if Mpesa.configuration.env == 'production'
-               File.read('lib/cert/production.pem')
+               File.read(File.join(File.dirname(__FILE__), '../cert/production.pem'))
              else
-               File.read('lib/cert/sandbox.pem')
+               File.read(File.join(File.dirname(__FILE__), '../cert/sandbox.pem'))
              end
 
       cert = OpenSSL::X509::Certificate.new(raw)

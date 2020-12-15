@@ -82,7 +82,9 @@ module Mpesa
 
     def call(path:, body:)
       base_url = Mpesa.configuration.base_url
-      token = JSON.parse(Mpesa.access_token.body)['access_token']
+      res = Mpesa.access_token
+      return res unless res.status == 200
+      token = JSON.parse(res.body)['access_token']
       headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
