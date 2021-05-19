@@ -1,7 +1,8 @@
 # Mpesa
 
 Welcome to [mpesa](https://developer.safaricom.co.ke/) API gem. The gem will help you integrate with mpesa daraja API very easily.
-Learn how to build your own gem (link)[https://github.com/gathuku/mpesa/blob/master/blog.md]
+
+Learn how to build your own gem [link](https://github.com/gathuku/mpesa/blob/master/blog.md)
 
 ## Installation
 
