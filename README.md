@@ -6,15 +6,9 @@ Learn how to build your own gem [link](https://github.com/gathuku/mpesa/blob/mas
 
 ## Installation
 
-Install from the command line
-```
-gem install mpesa --version "0.2.0" --source "https://rubygems.pkg.github.com/gathuku"
-```
 Install via `Gemfile`
 ```
-source "https://rubygems.pkg.github.com/gathuku" do
-  gem "mpesa", "0.2.0"
-end
+gem "mpesa", github: "gathuku/mpesa"
 ```
 
 
