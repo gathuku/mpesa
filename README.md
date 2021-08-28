@@ -11,6 +11,27 @@ Install via `Gemfile`
 gem "mpesa", github: "gathuku/mpesa"
 ```
 
+## Usage
+
+### Initialization
+```ruby
+client = Mpesa::Client.new(key: "SKKSS" , secret: "SJSKS", env: "sandbox", adapter: )
+
+res = client.auth
+res.access_token # XiKf3D6UrY0J8S2aeOQ7R7w0BuA5
+res.expires_in # 3599
+```
+
+### Register Urls
+
+```ruby
+ res = client.register(shortcode: "44445", confirmation_url: 'http://test.com', validation_url: 'http://test.com')
+
+```
+
+### PayIn (LPNMO)
+
+
 
 ## Configuration
 You will need to configure the gem with your own credentials.
