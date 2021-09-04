@@ -3,14 +3,14 @@ require 'faraday_middleware'
 
 module Mpesa
   class Client
-    attr_reader :key, :secret, :env, :adapter, :shortcode, :stk_key
+    attr_reader :key, :secret, :env, :adapter, :shortcode, :pass_key
 
-    def initialize(key:, secret:, shortcode: nil, stk_key: nil, env: 'production', adapter: Faraday.default_adapter)
+    def initialize(key:, secret:, shortcode: nil, pass_key: nil, env: 'production', adapter: Faraday.default_adapter)
       @key = key
       @secret = secret
       @env = env
       @adapter = adapter
-      @stk_key = stk_key
+      @pass_key = pass_key
       @shortcode = shortcode
     end
 

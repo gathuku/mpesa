@@ -12,7 +12,6 @@ module Mpesa
     end
 
     def post_request(url:, body: {}, headers: {})
-      puts body
       handle_response client.connection.post(url, body, headers)
     end
 
@@ -26,6 +25,8 @@ module Mpesa
         raise Error, "You are not allowed to perform that action. #{response.body['errorMessage']}"
       when 404
         raise Error, "No results were found for your request. #{response.body['errorMessage']}"
+      when 500
+        raise Error, "Something wrong happened. #{response.body['errorMessage']}"
       end
       response
     end

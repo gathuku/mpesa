@@ -25,7 +25,7 @@ module Mpesa
     end
 
     def password
-      Base64.strict_encode64("#{args[:shortcode]}#{client.stk_key || args[:stk_key]}#{timestamp}")
+      Base64.strict_encode64("#{args[:shortcode]}#{client.pass_key || args[:pass_key]}#{timestamp}")
     end
 
     def timestamp
