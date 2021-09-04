@@ -22,6 +22,7 @@ gem "mpesa", github: "gathuku/mpesa"
 ## Usage
 
 ### Initialization
+
 ```ruby
 client = Mpesa::Client.new(key: "SKKSS" , secret: "SJSKS", env: "sandbox", adapter: )
 
@@ -31,26 +32,35 @@ response.expires_in # 3599
 ```
 
 ### Register Urls
+
 Register C2B Urls( confirmation and validation url)
 ```ruby
- response = client.register(shortcode: "44445", confirmation_url: 'http://test.com', validation_url: 'http://test.com')
+ response = client.register(
+   shortcode: "44445",
+   confirmation_url: 'http://test.com', validation_url: 'http://test.com'
+ )
  response.OriginatorCoversationID #   "807-15591582-1"
  response.ResponseCode # "0"
  response.ResponseDescription # "success"  
 ```
 
 ### STK (LPNMO)
+
 Lipa na mpesa online(Stk Push)
 
 ```ruby
 response = client.stk(
-  shorcode: "174379",
+  shortcode: "174379",
+  pass_key: "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919", # Optional if passed in client initialization
   amount: "10",
   phone: "254705112855",
   callback_url: "https://test.com",
   reference: "REF",
   trans_desc: "desc"
 )
+
+response.CheckoutRequestID # "ws_CO_040920212326513616"
+response.inspect # to see all available attributes
 ```
 
 
