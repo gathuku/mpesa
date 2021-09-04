@@ -1,6 +1,14 @@
 # Mpesa
 
-Welcome to [mpesa](https://developer.safaricom.co.ke/) API gem. The gem will help you integrate with mpesa daraja API very easily.
+Welcome to [mpesa](https://developer.safaricom.co.ke/) API gem. The gem define the API resources and helps developer to make requests cleanly.
+
+When you receive a JSON response from an API endpoint, it's really easy to convert this to a Ruby hash. But hashes don't feel very Ruby-ish when you're working with them.
+
+To help on this this gem parse the responses to `OpenStruct` Objects so developer can interact with the response just like regular ruby objects we are used to.
+
+This Gem provives an interface that developers can use to convert json to `OpenStruct` objects, this is usefull when you want to parse results callbacks.
+
+
 
 Learn how to build your own gem [link](https://github.com/gathuku/mpesa/blob/master/blog.md)
 
@@ -17,90 +25,57 @@ gem "mpesa", github: "gathuku/mpesa"
 ```ruby
 client = Mpesa::Client.new(key: "SKKSS" , secret: "SJSKS", env: "sandbox", adapter: )
 
-res = client.auth
-res.access_token # XiKf3D6UrY0J8S2aeOQ7R7w0BuA5
-res.expires_in # 3599
+response = client.auth
+response.access_token # XiKf3D6UrY0J8S2aeOQ7R7w0BuA5
+response.expires_in # 3599
 ```
 
 ### Register Urls
+Register C2B Urls( confirmation and validation url)
+```ruby
+ response = client.register(shortcode: "44445", confirmation_url: 'http://test.com', validation_url: 'http://test.com')
+ response.OriginatorCoversationID #   "807-15591582-1"
+ response.ResponseCode # "0"
+ response.ResponseDescription # "success"  
+```
+
+### STK (LPNMO)
+Lipa na mpesa online(Stk Push)
 
 ```ruby
- res = client.register(shortcode: "44445", confirmation_url: 'http://test.com', validation_url: 'http://test.com')
+response = client.stk(
+  shorcode: "174379",
+  amount: "10",
+  phone: "254705112855",
+  callback_url: "https://test.com",
+  reference: "REF",
+  trans_desc: "desc"
+)
+```
+
+
+# B2C (Payout)
+
+```rb
+response = client.payout(
+  shortcode: "600998", # Optional if added in client initialization
+  initiator_username: "testapi", # ENV['INITIATOR_USERNAME']
+  initiator_password: "Safaricom998!", # ENV['INITIATOR_PASSWORD']
+  command_id: "BusinessPayment",
+  phone: "254708374149",
+  amount: "100",
+  result_url: "https://example.com/result",
+  timeout_url: "https://example.com/result",
+  occasion: "some desc",
+  remarks: "remarks"
+)
+
+response.ConversationID # AG_20210904_0000574b3c8d93651740
+response.OriginatorConversationID #  "28831-15819693-1"
+respose.ResponseDescription # "Accept the service request successfully."
 
 ```
 
-### PayIn (LPNMO)
-
-
-
-## Configuration
-You will need to configure the gem with your own credentials.
-You can add the configuration in `config/initializers/mpesa.rb` if you are using Rails. Be sure to use the right credentials from mpesa developer portal.
-
-> Apart form other configuration be sure to change `config.env = 'production'` and `config.base_url='https://api.safaricom.co.ke'` when you go live to production.
-
-```ruby
-# clear previous Configuration
-Mpesa.reset
-
-# configure
-Mpesa.configure do |config|
-  config.confirmation_url = 'https://7a5c955c.ngrok.io/api/confirmation_url'
-  config.validation_url = 'https://7a5c955c.ngrok.io/api/validation_url'
-  config.lnmo_shortcode = '174379'
-  config.paybill = '601380'
-  config.initiator_username = 'testapi113'
-  config.timeout_url = 'https://example.com/timeout'
-  config.result_url = 'https://example.com/result'
-  config.lnmocallback = 'https://7a5c955c.ngrok.io/lnmocallback'
-  config.lipa_na_mpesa_key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919' # ENV['MPESA_ONLINE_KEY']
-  config.env = 'sandbox'
-  config.base_url = 'https://sandbox.safaricom.co.ke'
-  config.initiator_password = 'Safari.com868'
-  config.key = 'ZtkRW6ATbVtFpNml5w5SfG26Adfyagn9' # ENV['MPESA_KEY']
-  config.secret = 'dosFI1yQ8bvHEVFw' # ENV['MPESA_SECRET']
-end
-```
-## Usage
-The gem will allow you to consume below APIs.
-- Register C2B URLS
-- Lipa na mpesa online
-- B2C
-
-> All responses are a faraday response
-
-You have access to
-
-- `response.status`
-- `response.headers`
-- `response.body`
-
-> If response status if not 200. Check `respose.body` or `response.reason_phrase` for more informative messages of the failure.
-
-### Register C2B URLS
-To register urls ensure you have defined your `paybill`,`confirmation_url` and `validation_url` in your config block. Then call `register_urls` method on `Mpesa` class.
-
-```
-response = Mpesa.register_urls
-```
-
-### Lipa na Mpesa online(STK push)
-Ensure you have added `lipa_na_mpesa_key`, `lnmo_shortcode`, `lnmocallback` in your config block.
-
-```
-response = Mpesa.stk_push(amount: 100, phone: '254705112855')
-```
-The methods accepts amount and phone number keyword arguments.
-
-### B2C
-Ensure you have `initiator_password`, `result_url` and `timeout_url` in your config block.
-
-```
-response = Mpesa.payout(amount: 100, phone: '254705112855',
-                        command_id: 'BusinessPayment', remarks: 'paid')
-```
-
-> `command_id ` can be `BusinessPayment`, `PromotionPayment` or `SalaryPayment`
 
 ## Development
 

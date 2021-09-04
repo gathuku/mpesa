@@ -8,6 +8,7 @@ module Mpesa
   autoload :Client, 'mpesa/client'
   autoload :Object, 'mpesa/object'
   autoload :Resource, 'mpesa/resource'
+  autoload :SecurityCred, 'mpesa/securitycred'
 
   autoload :Register, 'mpesa/resources/register'
   autoload :Token, 'mpesa/resources/token'

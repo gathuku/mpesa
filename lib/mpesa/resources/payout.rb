@@ -1,6 +1,6 @@
 module Mpesa
-  class Payout
-    PATH = 'mpesa/stkpush/v1/processrequest'.freeze
+  class Payout < Resource
+    PATH = 'mpesa/b2c/v1/paymentrequest'.freeze
 
     def call
       Object.new post_request(url: PATH, body: body).body
@@ -8,21 +8,21 @@ module Mpesa
 
     def body
       {
-        'InitiatorName': params['initiator_username'],
+        'InitiatorName': args[:initiator_username],
         'SecurityCredential': credentials,
-        'CommandID': params['command_id'],
-        'Amount': params['amount'],
-        'PartyA': params['shorcode'],
-        'PartyB': params['phone'],
-        'Remarks': params['remarks'],
-        'QueueTimeOutURL': param[:timeout_url],
-        'ResultURL': params['result_url'],
-        'Occasion': params['occasion']
+        'CommandID': args[:command_id],
+        'Amount': args[:amount],
+        'PartyA': client.shortcode || args[:shortcode],
+        'PartyB': args[:phone],
+        'Remarks': args[:remarks],
+        'QueueTimeOutURL': args[:timeout_url],
+        'ResultURL': args[:result_url],
+        'Occasion': args[:occasion]
       }
     end
 
     def credentials
-      SecurityCred.new(password).password_credential
+      SecurityCred.new(args[:initiator_password], client.env).password_credential
     end
   end
 end

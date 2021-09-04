@@ -1,3 +1,5 @@
+require 'base64'
+
 module Mpesa
   class Stk < Resource
     PATH = 'mpesa/stkpush/v1/processrequest'
@@ -8,22 +10,22 @@ module Mpesa
 
     def body
       {
-        'BusinessShortCode': params[:shortcode],
+        'BusinessShortCode': client.shortcode || args[:shortcode],
         'Password': password,
         'Timestamp': timestamp.to_s,
         'TransactionType': 'CustomerPayBillOnline',
-        'Amount': params[:amount],
-        'PartyA': params[:phone],
-        'PartyB': params[:shorcode],
-        'PhoneNumber': params[:phone],
-        'CallBackURL': params[:callback_url],
-        'AccountReference': params[:ref],
-        'TransactionDesc': params[:desc]
+        'Amount': args[:amount],
+        'PartyA': args[:phone],
+        'PartyB': client.shortcode || args[:shortcode],
+        'PhoneNumber': args[:phone],
+        'CallBackURL': args[:callback_url],
+        'AccountReference': args[:reference],
+        'TransactionDesc': args[:trans_desc]
       }
     end
 
     def password
-      Base64.strict_encode64("#{params[:shortcode]}#{params[:stk_key]}#{timestamp}")
+      Base64.strict_encode64("#{args[:shortcode]}#{client.stk_key || args[:stk_key]}#{timestamp}")
     end
 
     def timestamp

@@ -8,10 +8,10 @@ module Mpesa
 
     def body
       {
-        'ShortCode': params[:shortcode],
+        'ShortCode': args[:shortcode],
         'ResponseType': 'Completed',
-        'ConfirmationURL': params[:confirmation_url],
-        'ValidationURL': params[:validation_url]
+        'ConfirmationURL': args[:confirmation_url],
+        'ValidationURL': args[:validation_url]
       }
     end
   end

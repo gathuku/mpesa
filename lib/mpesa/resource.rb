@@ -1,10 +1,10 @@
 module Mpesa
   class Resource
-    attr_reader :client, :params
+    attr_reader :client, :args
 
-    def initialize(client, params = {})
+    def initialize(client, args = {})
       @client = client
-      @params = params
+      @args = args
     end
 
     def get_request(url:, params: {}, headers: {}, basic_auth: true)
@@ -12,6 +12,7 @@ module Mpesa
     end
 
     def post_request(url:, body: {}, headers: {})
+      puts body
       handle_response client.connection.post(url, body, headers)
     end
 
