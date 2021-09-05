@@ -36,7 +36,7 @@ module Mpesa
         conn.request :json
         conn.response :json, content_type: 'application/json'
         conn.adapter adapter
-        conn.basic_auth key, secret if basic_auth
+        conn.request :basic_auth, key, secret if basic_auth
         conn.request :authorization, :Bearer, auth.access_token unless basic_auth
       end
     end
