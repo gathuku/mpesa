@@ -12,7 +12,12 @@ This Gem provides an interface that developers can use to convert JSON to `OpenS
 
 Install via `Gemfile`
 ```
-gem "mpesa", github: "gathuku/mpesa"
+gem 'mpesarb', '~> 0.3.0'
+```
+
+Or
+```
+bundle add mpesarb
 ```
 
 ## Usage
