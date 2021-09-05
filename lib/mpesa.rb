@@ -1,42 +1,21 @@
 # frozen_string_literal: true
 
-require 'mpesa/version'
-require 'mpesa/mpesamain'
-require 'mpesa/securitycred'
-require 'uri'
-require 'faraday'
-require 'json'
+require_relative 'mpesa/version'
 
 # main module
 module Mpesa
-  class Error < StandardError; end
-  # Your code goes here...
-  class << self
-    attr_accessor :configuration
+  autoload :Error, 'mpesa/error'
+  autoload :Client, 'mpesa/client'
+  autoload :Object, 'mpesa/object'
+  autoload :Resource, 'mpesa/resource'
+  autoload :SecurityCred, 'mpesa/securitycred'
 
-    # Configure method
-    def configure
-      self.configuration ||= Configuration.new
-      yield(configuration)
-    end
+  autoload :Register, 'mpesa/resources/register'
+  autoload :Token, 'mpesa/resources/token'
+  autoload :Stk, 'mpesa/resources/stk'
+  autoload :Payout, 'mpesa/resources/payout'
+  autoload :Status, 'mpesa/resources/status'
+  autoload :Balance, 'mpesa/resources/balance'
 
-    # Reset to load defaults
-    def reset
-      self.configuration = Configuration.new
-    end
-  end
-end
-
-# Configuration class
-class Configuration
-  attr_accessor :confirmation_url, :validation_url,
-                :lnmo_shortcode, :paybill, :initiator_username,
-                :timeout_url, :result_url, :lnmocallback,
-                :lipa_na_mpesa_key, :env, :base_url, :key, :secret,
-                :initiator_password
-  def initialize
-    @confirmation_url = '/confirm'
-    @validation_url = '/validate'
-    @shortcode = '171837'
-  end
+  autoload :Instance, 'mpesa/objects/instace'
 end

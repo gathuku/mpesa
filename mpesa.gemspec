@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['mosesgathuku95@gmail.com']
 
   spec.summary       = 'a simple gem to integrate ruby with mpesa Apis'
-  spec.description   = 'the gem will allow you to simply integrate eithmpesa api'
+  spec.description   = 'the gem will allow you to simply integrate with mpesa apis'
   spec.homepage      = 'https://github.com/gathuku/ruby_mpesa'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '>= 12.3'
   # dependancies
   spec.add_runtime_dependency 'faraday', '>= 1.1'
+  spec.add_runtime_dependency 'faraday_middleware', '~> 1.1'
   spec.add_runtime_dependency 'json', '>= 2.2'
   spec.add_runtime_dependency 'openssl', '>= 2.1'
   # request
