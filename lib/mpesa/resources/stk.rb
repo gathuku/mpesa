@@ -10,13 +10,13 @@ module Mpesa
 
     def body
       {
-        'BusinessShortCode': client.shortcode || args[:shortcode],
+        'BusinessShortCode': args[:shortcode] || client.shortcode,
         'Password': password,
         'Timestamp': timestamp.to_s,
         'TransactionType': 'CustomerPayBillOnline',
         'Amount': args[:amount],
         'PartyA': args[:phone],
-        'PartyB': client.shortcode || args[:shortcode],
+        'PartyB': args[:shortcode] || client.shortcode,
         'PhoneNumber': args[:phone],
         'CallBackURL': args[:callback_url],
         'AccountReference': args[:reference],

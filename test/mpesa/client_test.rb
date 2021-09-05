@@ -16,7 +16,7 @@ class ClientTest < MpesaTest
         confirmation_url: 'http://test.com',
         validation_url: 'http://test.com'
       )
-      assert_not_nil response.OriginatorCoversationID
+      refute_nil response.OriginatorCoversationID
     end
   end
 
@@ -35,7 +35,7 @@ class ClientTest < MpesaTest
         remarks: 'remarks'
       )
 
-      assert_not_nil response.ConversationID
+      refute_nil response.ConversationID
     end
   end
 
@@ -50,7 +50,7 @@ class ClientTest < MpesaTest
         reference: 'REF',
         trans_desc: 'desc'
       )
-      assert_not_nil response.CheckoutRequestID
+      refute_nil response.CheckoutRequestID
     end
   end
 end
