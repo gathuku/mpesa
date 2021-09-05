@@ -25,12 +25,24 @@ bundle add mpesarb
 ### Initialization
 
 ```ruby
-client = Mpesa::Client.new(key: "SKKSS" , secret: "SJSKS", env: "sandbox", adapter: )
+client = Mpesa::Client.new(key: 'ZtkRW6ATbVtFpNml5w5SfG26Adfyagn9', secret: 'dosFI1yQ8bvHEVFw', env: 'sandbox')
 
 response = client.auth
 response.access_token # XiKf3D6UrY0J8S2aeOQ7R7w0BuA5
 response.expires_in # 3599
 ```
+__Parameters__
+
+Required
+- `key` - API consumer key - Required
+- `secret` - API consumer secret  - Required
+
+Optional
+- `env` - API environment. Default `production`
+- `adapter` - Faraday HTTP adapter. Default `:net_http`
+- `shortcode` - Mpesa shortcode
+- `pass_key` - LPNMO pass Key( used by STK API)
+
 
 ### Register Urls
 
@@ -38,7 +50,8 @@ Register C2B Urls( confirmation and validation url)
 ```ruby
  response = client.register(
    shortcode: "44445",
-   confirmation_url: 'http://test.com', validation_url: 'http://test.com'
+   confirmation_url: 'http://example.com/confirm',
+   validation_url: 'http://example.com/validate'
  )
  response.OriginatorCoversationID #   "807-15591582-1"
  response.ResponseCode # "0"
