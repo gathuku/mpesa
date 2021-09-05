@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "mpesa"
+require 'bundler/setup'
+require 'mpesa'
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -10,5 +10,7 @@ require "mpesa"
 # require "pry"
 # Pry.start
 
-require "irb"
+client = Mpesa::Client.new(key: 'ZtkRW6ATbVtFpNml5w5SfG26Adfyagn9', secret: 'dosFI1yQ8bvHEVFw', env: 'sandbox')
+
+require 'irb'
 IRB.start(__FILE__)
