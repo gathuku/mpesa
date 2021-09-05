@@ -3,13 +3,13 @@ PATH
   specs:
     mpesa (0.2.0)
       faraday (>= 1.1)
-      json (>= 2.2)
+      faraday_middleware (~> 1.1)
       openssl (>= 2.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ansi (1.5.0)
     builder (3.2.4)
@@ -21,16 +21,35 @@ GEM
       term-ansicolor (~> 1.3)
       thor (>= 0.19.4, < 2.0)
       tins (~> 1.6)
-    crack (0.4.4)
-    docile (1.3.2)
-    faraday (1.1.0)
+    crack (0.4.5)
+      rexml
+    docile (1.4.0)
+    faraday (1.7.1)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
       multipart-post (>= 1.2, < 3)
-      ruby2_keywords
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    faraday_middleware (1.1.0)
+      faraday (~> 1.0)
     hashdiff (1.0.1)
-    json (2.3.1)
+    json (2.5.1)
     method_source (1.0.0)
-    minitest (5.14.2)
-    minitest-reporters (1.4.2)
+    minitest (5.14.4)
+    minitest-reporters (1.4.3)
       ansi
       builder
       minitest (>= 5.0)
@@ -44,9 +63,10 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.13.0)
     public_suffix (4.0.6)
-    rake (12.3.3)
-    ruby-progressbar (1.10.1)
-    ruby2_keywords (0.0.2)
+    rake (13.0.6)
+    rexml (3.2.5)
+    ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.5)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -55,17 +75,17 @@ GEM
     sync (0.5.0)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
-    thor (1.0.1)
-    tins (1.26.0)
+    thor (1.1.0)
+    tins (1.29.1)
       sync
-    vcr (5.1.0)
-    webmock (3.10.0)
-      addressable (>= 2.3.6)
+    vcr (6.0.0)
+    webmock (3.14.0)
+      addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-19
 
 DEPENDENCIES
   bundler (>= 2.1.4)
@@ -76,7 +96,6 @@ DEPENDENCIES
   mpesa!
   pry-byebug
   rake (>= 12.3)
-  simplecov
   vcr
   webmock (~> 3.7)
 

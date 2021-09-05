@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '>= 12.3'
   # dependancies
   spec.add_runtime_dependency 'faraday', '>= 1.1'
-  spec.add_runtime_dependency 'json', '>= 2.2'
+  spec.add_runtime_dependency 'faraday_middleware', '~> 1.1'
   spec.add_runtime_dependency 'openssl', '>= 2.1'
   # request
   spec.add_development_dependency 'minitest'
@@ -45,5 +45,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry-byebug'
   # code coverage
   spec.add_development_dependency 'coveralls'
-  spec.add_development_dependency 'simplecov'
 end
