@@ -1,16 +1,12 @@
 # Mpesa
 
-Welcome to [mpesa](https://developer.safaricom.co.ke/) API gem. The gem define the API resources and helps developer to make requests cleanly.
+Welcome to [mpesa](https://developer.safaricom.co.ke/) API gem. The gem defines the API resources and helps developers to make requests cleanly.
 
 When you receive a JSON response from an API endpoint, it's really easy to convert this to a Ruby hash. But hashes don't feel very Ruby-ish when you're working with them.
 
-To help on this this gem parse the responses to `OpenStruct` Objects so developer can interact with the response just like regular ruby objects we are used to.
+To help on this gem parse the responses to `OpenStruct` Objects so a developer can interact with the response just like regular ruby objects we are used to.
 
-This Gem provives an interface that developers can use to convert json to `OpenStruct` objects, this is usefull when you want to parse results callbacks.
-
-
-
-Learn how to build your own gem [link](https://github.com/gathuku/mpesa/blob/master/blog.md)
+This Gem provides an interface that developers can use to convert JSON to `OpenStruct` objects, this is useful when you want to parse results callbacks data.
 
 ## Installation
 
@@ -64,13 +60,13 @@ response.inspect # to see all available attributes
 ```
 
 
-# B2C (Payout)
+### B2C (Payout)
 
 ```rb
 response = client.payout(
   shortcode: "600998", # Optional if added in client initialization
-  initiator_username: "testapi", # ENV['INITIATOR_USERNAME']
-  initiator_password: "Safaricom998!", # ENV['INITIATOR_PASSWORD']
+  initiator_username: "testapi",
+  initiator_password: "Safaricom998!",
   command_id: "BusinessPayment",
   phone: "254708374149",
   amount: "100",
