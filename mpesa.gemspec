@@ -3,7 +3,7 @@
 require_relative 'lib/mpesa/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'mpesa'
+  spec.name          = 'mpesarb'
   spec.version       = Mpesa::VERSION
   spec.authors       = ['Moses Gathuku']
   spec.email         = ['mosesgathuku95@gmail.com']
@@ -14,11 +14,9 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
 
-  spec.metadata['allowed_push_host'] = 'https://rubygems.pkg.github.com/gathuku'
-
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/gathuku/ruby_mpesa'
-  spec.metadata['changelog_uri'] = 'https://github.com/gathuku/ruby_mpesa'
+  spec.metadata['source_code_uri'] = 'https://github.com/gathuku/mpesa'
+  spec.metadata['changelog_uri'] = 'https://github.com/gathuku/mpesa'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
