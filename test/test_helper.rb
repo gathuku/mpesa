@@ -11,7 +11,6 @@ require 'webmock/minitest'
 require 'minitest/reporters'
 require 'coveralls'
 require 'vcr'
-require 'active_support/testing/time_helpers'
 
 # coverage
 Coveralls.wear!

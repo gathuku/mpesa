@@ -6,7 +6,11 @@ module Mpesa
   class Token < Resource
     def token
       if cache.exist?('token')
-        cache.fetch('token')
+        expires_at = cache.send(:read_entry, 'token')&.expires_at
+        Object.new({
+                     "access_token": cache.fetch('token'),
+                     "expires_in": expires_at - Time.now.to_f
+                   })
       else
         cache_token
       end
@@ -15,7 +19,7 @@ module Mpesa
     def cache_token
       res = call
       cache.write('token', res.access_token, expires_in: res.expires_in)
-      token
+      res
     end
 
     def call
@@ -23,7 +27,7 @@ module Mpesa
     end
 
     def cache
-      ActiveSupport::Cache::MemoryStore.new
+      @cache ||= ActiveSupport::Cache::MemoryStore.new
     end
   end
 end
