@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '>= 2.1.4'
   spec.add_development_dependency 'rake', '>= 12.3'
   # dependancies
+  spec.add_runtime_dependency 'activesupport', '>= 5.0.0'
   spec.add_runtime_dependency 'faraday', '>= 1.1'
   spec.add_runtime_dependency 'faraday_middleware', '~> 1.1'
   spec.add_runtime_dependency 'openssl', '>= 2.1'
