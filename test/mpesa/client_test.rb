@@ -69,4 +69,22 @@ class ClientTest < MpesaTest
       assert_equal '0', response.ResponseCode
     end
   end
+
+  def test_reversal
+    VCR.use_cassette('reversal') do
+      response = @client.reversal(
+        initiator_password: 'Safaricom426!',
+        initiator_username: 'testapi',
+        transaction_id: 'OEI2AK4Q16',
+        amount: '100',
+        receiver: '600610',
+        receiver_type: '4',
+        timeout_url: 'https://example.com/result',
+        result_url: 'https://example.com/result'
+      )
+
+      refute_nil response.OriginatorConversationID
+      assert_equal '0', response.ResponseCode
+    end
+  end
 end

@@ -38,6 +38,10 @@ module Mpesa
       Balance.new(self, args).call
     end
 
+    def reversal(**args)
+      Reversal.new(self, args).call
+    end
+
     def connection(basic_auth: false)
       @connection ||= Faraday.new do |conn|
         conn.url_prefix = "https://#{subdomain}.safaricom.co.ke"
