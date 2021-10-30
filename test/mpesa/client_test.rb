@@ -53,4 +53,20 @@ class ClientTest < MpesaTest
       refute_nil response.CheckoutRequestID
     end
   end
+
+  def test_status
+    VCR.use_cassette('status') do
+      response = @client.status(
+        shortcode: '600426',
+        transaction_id: 'OEI2AK4Q16',
+        identifier_type: 1,
+        initiator_username: 'testapi',
+        initiator_password: 'Safaricom426!',
+        timeout_url: 'https://example.com/result',
+        result_url: 'https://example.com/result'
+      )
+      refute_nil response.ConversationID
+      assert_equal '0', response.ResponseCode
+    end
+  end
 end

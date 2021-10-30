@@ -30,6 +30,14 @@ module Mpesa
       Payout.new(self, args).call
     end
 
+    def status(**args)
+      Status.new(self, args).call
+    end
+
+    def balance(**args)
+      Balance.new(self, args).call
+    end
+
     def connection(basic_auth: false)
       @connection ||= Faraday.new do |conn|
         conn.url_prefix = "https://#{subdomain}.safaricom.co.ke"
