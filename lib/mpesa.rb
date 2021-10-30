@@ -16,6 +16,7 @@ module Mpesa
   autoload :Payout, 'mpesa/resources/payout'
   autoload :Status, 'mpesa/resources/status'
   autoload :Balance, 'mpesa/resources/balance'
+  autoload :Reversal, 'mpesa/resources/reversal'
 
   autoload :Instance, 'mpesa/objects/instace'
 end

@@ -118,6 +118,26 @@ response.ConversationID
 response.ResponseCode
 ```
 
+### Reversal 
+Initiate a reversal
+
+```
+ response = client.reversal(
+   initiator_password: 'Safaricom426!',
+   initiator_username: 'testapi',
+   transaction_id: 'OEI2AK4Q16',
+   amount: '100',
+   receiver: '600610',
+   receiver_type: '4',
+   timeout_url: 'https://example.com/result',
+   result_url: 'https://example.com/result'
+ )
+
+response.ConversationID
+response.ResponseCode
+
+```
+
 
 ## Development
 
