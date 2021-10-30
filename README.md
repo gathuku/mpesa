@@ -100,6 +100,24 @@ respose.ResponseDescription # "Accept the service request successfully."
 
 ```
 
+### Transaction Status
+Check Transation Status
+
+```rb
+response = client.status(
+   shortcode: '600426',
+   transaction_id: 'OEI2AK4Q16',
+   identifier_type: 1,
+   initiator_username: 'testapi',
+   initiator_password: 'Safaricom426!',
+   timeout_url: 'https://example.com/result',
+   result_url: 'https://example.com/result'
+)
+
+response.ConversationID
+response.ResponseCode
+```
+
 
 ## Development
 
