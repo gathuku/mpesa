@@ -1,4 +1,6 @@
-### Unreleased
+### 2022-01-04
+- Support `response` `to_hash` method
+### 2020-01-20
 - Update gemspec
 - Read certificate full path
 - Return early if get access token fail
