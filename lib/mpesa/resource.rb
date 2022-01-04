@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mpesa
   class Resource
     attr_reader :client, :args

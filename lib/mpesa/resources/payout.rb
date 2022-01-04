@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mpesa
   class Payout < Resource
-    PATH = 'mpesa/b2c/v1/paymentrequest'.freeze
+    PATH = 'mpesa/b2c/v1/paymentrequest'
 
     def call
       Object.new post_request(url: PATH, body: body).body

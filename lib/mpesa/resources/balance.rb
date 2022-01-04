@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mpesa
   class Status < Resource
     PATH = 'mpesa/transactionstatus/v1/query'

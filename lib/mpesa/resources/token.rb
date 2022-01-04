@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/cache'
 require 'active_support/cache/memory_store'
 require 'active_support/notifications'

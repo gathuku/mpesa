@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mpesa
   class Register < Resource
-    PATH = 'mpesa/c2b/v1/registerurl'.freeze
+    PATH = 'mpesa/c2b/v1/registerurl'
 
     def call
       Object.new post_request(url: PATH, body: body).body
