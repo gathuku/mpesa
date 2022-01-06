@@ -12,7 +12,7 @@ This Gem provides an interface that developers can use to convert JSON to `OpenS
 
 Install via `Gemfile`
 ```
-gem 'mpesarb', '~> 0.3.0'
+gem 'mpesarb', '~> 0.3.2'
 ```
 
 Or
