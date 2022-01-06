@@ -4,6 +4,8 @@ require 'ostruct'
 
 module Mpesa
   class Object
+    attr_reader :attributes
+
     def initialize(attributes)
       @attributes = OpenStruct.new(attributes)
     end
@@ -15,6 +17,10 @@ module Mpesa
 
     def respond_to_missing?(_method, _include_private = false)
       true
+    end
+
+    def to_hash
+      attributes.to_h
     end
   end
 end
