@@ -32,5 +32,12 @@ module Mpesa
       end
       response
     end
+
+    def format_phone(phone)
+      phone = phone.to_s
+      return phone if phone.match?(/\A254/)
+
+      phone.sub(/\A[+0]?(254)?(\d+)/, '254\2')
+    end
   end
 end

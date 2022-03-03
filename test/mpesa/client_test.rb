@@ -45,7 +45,7 @@ class ClientTest < MpesaTest
       response = @client.stk(
         shortcode: '174379',
         amount: '10',
-        phone: '254705112855',
+        phone: '0705112855',
         callback_url: 'https://test.com',
         reference: 'REF',
         trans_desc: 'desc'

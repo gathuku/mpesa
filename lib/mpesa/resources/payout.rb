@@ -15,7 +15,7 @@ module Mpesa
         'CommandID': args[:command_id],
         'Amount': args[:amount],
         'PartyA': client.shortcode || args[:shortcode],
-        'PartyB': args[:phone],
+        'PartyB': format_phone(args[:phone]),
         'Remarks': args[:remarks],
         'QueueTimeOutURL': args[:timeout_url],
         'ResultURL': args[:result_url],
