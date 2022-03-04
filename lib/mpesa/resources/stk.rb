@@ -14,12 +14,12 @@ module Mpesa
       {
         'BusinessShortCode': shortcode,
         'Password': password,
-        'Timestamp': timestamp.to_s,
+        'Timestamp': timestamp,
         'TransactionType': 'CustomerPayBillOnline',
         'Amount': args[:amount],
-        'PartyA': args[:phone],
+        'PartyA': format_phone(args[:phone]),
         'PartyB': shortcode,
-        'PhoneNumber': args[:phone],
+        'PhoneNumber': format_phone(args[:phone]),
         'CallBackURL': args[:callback_url],
         'AccountReference': args[:reference],
         'TransactionDesc': args[:trans_desc]
@@ -31,7 +31,7 @@ module Mpesa
     end
 
     def timestamp
-      Time.now.strftime('%Y%m%d%H%M%S').to_i
+      Time.now.strftime('%Y%m%d%H%M%S')
     end
 
     def shortcode
