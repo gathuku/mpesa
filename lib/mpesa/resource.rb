@@ -10,7 +10,7 @@ module Mpesa
     end
 
     def get_request(url:, params: {}, headers: {}, basic_auth: true)
-      handle_response client.connection(basic_auth: basic_auth).get(url, params, headers)
+      handle_response client.connection(basic_auth:).get(url, params, headers)
     end
 
     def post_request(url:, body: {}, headers: {})
@@ -18,6 +18,8 @@ module Mpesa
     end
 
     def handle_response(response)
+      return response unless client.raise_errors
+
       case response.status
       when 400
         raise Error, "Your request was malformed. #{response.body['errorMessage']}"
