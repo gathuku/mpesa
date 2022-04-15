@@ -44,8 +44,9 @@ class ResourceTest < Minitest::Test
   def test_should_not_raise_error_if_disabled
     client = Mpesa::Client.new(key: '', secret: '', raise_errors: false)
     resource = Mpesa::Resource.new(client)
-
+    response = resource.handle_response(@conn.get("/"))
     refute client.raise_errors
-    assert_equal 401, resource.handle_response(@conn.get).status
+    assert_equal 401, response.status
+    assert_equal "wrong credentials", response.body['errorMessage']
   end
 end
