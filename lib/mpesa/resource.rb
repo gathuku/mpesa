@@ -10,7 +10,7 @@ module Mpesa
     end
 
     def get_request(url:, params: {}, headers: {}, basic_auth: true)
-      handle_response client.connection(basic_auth:).get(url, params, headers)
+      handle_response client.connection(basic_auth: basic_auth).get(url, params, headers)
     end
 
     def post_request(url:, body: {}, headers: {})
