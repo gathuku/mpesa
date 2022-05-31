@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'faraday'
-require 'faraday_middleware'
 
 module Mpesa
   class Client
@@ -51,8 +50,8 @@ module Mpesa
         conn.request :json
         conn.response :json, content_type: 'application/json'
         conn.adapter adapter
-        conn.request :basic_auth, key, secret if basic_auth
-        conn.request :authorization, :Bearer, auth.access_token unless basic_auth
+        conn.request :authorization, :basic, key, secret if basic_auth
+        conn.request :authorization, 'Bearer', auth.access_token unless basic_auth
       end
     end
 
