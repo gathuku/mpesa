@@ -18,6 +18,8 @@ module Mpesa
     end
 
     def handle_response(response)
+      return response unless client.raise_errors
+
       case response.status
       when 400
         raise Error, "Your request was malformed. #{response.body['errorMessage']}"
