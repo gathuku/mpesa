@@ -42,6 +42,7 @@ Optional
 - `adapter` - Faraday HTTP adapter. Default `:net_http`
 - `shortcode` - Mpesa shortcode
 - `pass_key` - LPNMO pass Key( used by STK API)
+- `raise_errors` - `Boolean` raise errors if response status code is not 200. Default: `true`
 
 
 ### Register Urls
@@ -118,7 +119,7 @@ response.ConversationID
 response.ResponseCode
 ```
 
-### Reversal 
+### Reversal
 Initiate a reversal
 
 ```
