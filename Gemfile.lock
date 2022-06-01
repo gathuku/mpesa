@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mpesarb (0.3.3)
+    mpesarb (0.3.4)
       activesupport (>= 5.0.0)
       faraday (>= 2.0.1)
       openssl (>= 2.1)
