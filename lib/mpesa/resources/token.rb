@@ -26,7 +26,7 @@ module Mpesa
 
     def call
       res = get_request(url: 'oauth/v1/generate?grant_type=client_credentials', basic_auth: true)
-      raise res.reason_phrase if res.body.empty?
+      raise Error, res.reason_phrase if res.body.empty?
       Object.new(res.body)
     end
 

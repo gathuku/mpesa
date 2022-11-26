@@ -7,7 +7,6 @@ module Mpesa
     attr_reader :attributes
 
     def initialize(attributes)
-      return unless attributes.is_a?(Hash)
       @attributes = OpenStruct.new(attributes)
     end
 
