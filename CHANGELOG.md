@@ -1,5 +1,5 @@
 ### 2022-11-26
-- Improve invalid credentials error messages
+- Raise error on invalid oauth credentails
 ### 2022-05-31
 - Faraday 2.0.1 or greater
 ### 2022-01-04
