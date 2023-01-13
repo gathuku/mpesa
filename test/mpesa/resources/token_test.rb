@@ -29,4 +29,19 @@ class TokenTest < MpesaTest
       refute token_instance.cache.exist?('token')
     end
   end
+
+  def test_raise_error_on_invalid_credentials
+    client = Mpesa::Client.new(
+      key: 'ZtkRW6ATbVtFpNml5w5SfG26Adfyagn9',
+      secret: 'wrong_secret',
+      env: 'sandbox',
+      shortcode: '600998'
+    )
+
+    token_instance = Mpesa::Token.new(client)
+
+    assert_raises Mpesa::Error do
+      token_instance.cache_token
+    end
+  end
 end
