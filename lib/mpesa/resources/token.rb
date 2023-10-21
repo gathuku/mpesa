@@ -20,7 +20,7 @@ module Mpesa
 
     def cache_token
       res = call
-      cache.write('token', res.access_token, expires_in: res.expires_in)
+      cache.write('token', res.access_token, expires_in: res.expires_in.to_i)
       res
     end
 
