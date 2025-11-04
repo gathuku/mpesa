@@ -28,6 +28,10 @@ module Mpesa
       Stk.new(self, args).call
     end
 
+    def stk_query(**args)
+      StkQuery.new(self, args).call
+    end
+
     def payout(**args)
       Payout.new(self, args).call
     end
