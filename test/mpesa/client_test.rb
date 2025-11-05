@@ -3,6 +3,7 @@
 require 'test_helper'
 class ClientTest < MpesaTest
   def test_access_token
+    # skip
     VCR.use_cassette('access_token') do
       response = @client.auth
       refute_nil response.access_token
@@ -10,6 +11,7 @@ class ClientTest < MpesaTest
   end
 
   def test_register_urls
+    # skip
     VCR.use_cassette('register_urls') do
       response = @client.register(
         shortcode: '600998',
@@ -22,6 +24,7 @@ class ClientTest < MpesaTest
 
   # Test B2C payouts
   def test_b2c_payout
+    # skip
     VCR.use_cassette('b2c_payout') do
       response = @client.payout(
         initiator_username: 'testapi',
@@ -41,6 +44,7 @@ class ClientTest < MpesaTest
 
   # Test STK
   def test_stk
+    # skip
     VCR.use_cassette('stk_push') do
       response = @client.stk(
         shortcode: '174379',
@@ -52,6 +56,26 @@ class ClientTest < MpesaTest
       )
       refute_nil response.CheckoutRequestID
     end
+  end
+
+  def test_stk_transaction_type
+    # skip
+    payload = {
+      shortcode: '174379',
+      amount: '10',
+      phone: '0705112855',
+      callback_url: 'https://test.com',
+      reference: 'REF',
+      trans_desc: 'desc'
+    }
+    resource = Mpesa::Stk.new(@client, payload)
+    assert_equal 'CustomerPayBillOnline', resource.body[:TransactionType], 'should default to a paybill transaction'
+    assert_equal payload[:shortcode], resource.body[:PartyB]
+
+    resource = Mpesa::Stk.new(@client, payload.merge({ till_no: '379174' }))
+    assert_equal 'CustomerBuyGoodsOnline', resource.body[:TransactionType],
+                 'should initiate a till payment if till_no provided'
+    assert_equal '379174', resource.body[:PartyB]
   end
 
   def test_status

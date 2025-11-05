@@ -66,6 +66,7 @@ Lipa na mpesa online(Stk Push)
 ```ruby
 response = client.stk(
   shortcode: "174379",
+  # till_no: "379174",
   pass_key: "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919", # Optional if passed in client initialization
   amount: "10",
   phone: "254705112855",
@@ -77,6 +78,7 @@ response = client.stk(
 response.CheckoutRequestID # "ws_CO_040920212326513616"
 response.inspect # to see all available attributes
 ```
+If working with a till number, pass it in the `till_no` param. The shortcode should be the HeadOffice(HO)/Store number.
 
 ### STK Query
 

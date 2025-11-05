@@ -15,14 +15,19 @@ module Mpesa
         'BusinessShortCode': shortcode,
         'Password': password,
         'Timestamp': timestamp,
-        'TransactionType': 'CustomerPayBillOnline',
         'Amount': args[:amount],
         'PartyA': format_phone(args[:phone]),
-        'PartyB': shortcode,
         'PhoneNumber': format_phone(args[:phone]),
         'CallBackURL': args[:callback_url],
         'AccountReference': args[:reference],
         'TransactionDesc': args[:trans_desc]
+      }.merge(transaction_details)
+    end
+
+    def transaction_details
+      {
+        'TransactionType': args[:till_no].present? ? 'CustomerBuyGoodsOnline' : 'CustomerPayBillOnline',
+        'PartyB': args[:till_no] || shortcode
       }
     end
 
