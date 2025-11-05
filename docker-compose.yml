@@ -4,3 +4,6 @@ services:
     build: .
     volumes:
       - .:/mpesa
+      - bundle:/usr/local/bundle
+volumes:
+  bundle:

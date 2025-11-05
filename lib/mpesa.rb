@@ -13,6 +13,7 @@ module Mpesa
   autoload :Register, 'mpesa/resources/register'
   autoload :Token, 'mpesa/resources/token'
   autoload :Stk, 'mpesa/resources/stk'
+  autoload :StkQuery, 'mpesa/resources/stk_query'
   autoload :Payout, 'mpesa/resources/payout'
   autoload :Status, 'mpesa/resources/status'
   autoload :Balance, 'mpesa/resources/balance'

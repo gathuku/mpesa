@@ -59,7 +59,7 @@ Register C2B Urls( confirmation and validation url)
  response.ResponseDescription # "success"  
 ```
 
-### STK (LPNMO)
+### STK (LPNMO)/M-Pesa Express
 
 Lipa na mpesa online(Stk Push)
 
@@ -78,6 +78,18 @@ response.CheckoutRequestID # "ws_CO_040920212326513616"
 response.inspect # to see all available attributes
 ```
 
+### STK Query
+
+Check the status of a Lipa na M-Pesa Online transaction.
+
+```ruby
+response = client.stk_query(
+  checkout_request_id: "ws_CO_040920212326513616"
+)
+
+response.ResultCode # "1032"
+response.ResultDesc # "Request Cancelled by user."
+```
 
 ### B2C (Payout)
 
