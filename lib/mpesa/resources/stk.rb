@@ -25,9 +25,10 @@ module Mpesa
     end
 
     def transaction_details
+      till_no = args[:till_no] unless args[:till_no].nil? || args[:till_no].strip.empty?
       {
-        'TransactionType': args[:till_no].present? ? 'CustomerBuyGoodsOnline' : 'CustomerPayBillOnline',
-        'PartyB': args[:till_no] || shortcode
+        'TransactionType': till_no.nil? ? 'CustomerPayBillOnline' : 'CustomerBuyGoodsOnline',
+        'PartyB': till_no || shortcode
       }
     end
 
